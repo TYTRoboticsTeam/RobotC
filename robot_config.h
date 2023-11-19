@@ -1,4 +1,12 @@
 #pragma once
+// ------These are the config I used for testing------ //
+//#pragma config(Motor,  motorB,          MB,            tmotorEV3_Large, PIDControl, driveLeft, encoder)
+//#pragma config(Motor,  motorC,          MC,            tmotorEV3_Large, PIDControl, driveRight, encoder)
+//#pragma config(Sensor, S1,     CS1,            sensorEV3_Color)
+//#pragma config(Sensor, S2,     CS2,            sensorEV3_Color)
+//#pragma config(Sensor, S3,     US,             sensorEV3_Ultrasonic)
+//#pragma config(Sensor, S4,     GS,             sensorEV3_Gyro, modeEV3Gyro_RateAndAngle)
+
 // Initialize your robot configurations here.
 
 bool start_main = false;
@@ -30,6 +38,8 @@ typedef enum{
 
 #define WHEEL_RADIUS 28 //unit in mm
 
+// To use the "turn" function well, you have to tune this value accurately
+// If you are using a gyro, its ok not to bother with this variable
 #define WHEEL_SEPARATION 139 //unit in mm
 
 #define COLOUR_SENSORS_DISTANCE 27 //unit in mm

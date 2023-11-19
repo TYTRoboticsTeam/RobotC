@@ -11,6 +11,7 @@ DriveTrain wheelbase;
 
 bool wb_init(bool init){
 	if (!init){
+		// ---These are the config I used for testing--- //
 		//wheelbase.left = motorB;
 		//wheelbase.right = motorC;
 		//wheelbase.motor_type = EV3_LARGE;

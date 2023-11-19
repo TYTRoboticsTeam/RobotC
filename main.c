@@ -19,5 +19,6 @@ task main(){
 			if (getButtonPress(buttonEnter) != 1) continue;
 			else start_main = true;
 		}
+		//Write your code here (Altho it is not recommened to put all the code in main())
 	}
 }
