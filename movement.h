@@ -2,6 +2,8 @@
 #pragma once
 #include "robot_config.h"
 #include "pid.h"
+#include "display.h"
+#include "calculation.h"
 
 /**
  * @brief The robot move with both motors turning in the same speed. No PID is used. Excat directions of the
@@ -90,7 +92,7 @@ void reset_drivetrain_encoder(DriveTrain* driveTrain){
  * @param driveTrain The drivetrain of the robot
  * @param degree The degree of turning of the whole robot (unit: degree)
  * @param turning_motor The motor use for turning (LEFT/RIGHT)
- * @param speed Speed of the turning motor (-100 ~ 100) (unit: %)
+ * @param speed Speed of the turning motor (>0) (unit: %)
  */
 void single_self_turn(DriveTrain* driveTrain, float degree, direction turning_motor, float speed){
 	float setpoint = (WHEEL_SEPARATION * degree) / WHEEL_RADIUS;
@@ -98,14 +100,14 @@ void single_self_turn(DriveTrain* driveTrain, float degree, direction turning_mo
 		setMotorSpeed(driveTrain -> right, 0);
 		if (driveTrain -> motor_type != EV3_MEDIUM){
 			if (driveTrain -> is_inverted == true){
-				moveMotorTarget(driveTrain -> left, setpoint, -speed);
+				moveMotorTarget(driveTrain -> left, -setpoint, speed);
 			} else {
 				moveMotorTarget(driveTrain -> left, setpoint, speed);
 			}
 		} else if (driveTrain -> is_inverted == true){
 			moveMotorTarget(driveTrain -> left, setpoint, speed);
 		} else{
-			moveMotorTarget(driveTrain -> left, setpoint, -speed);
+			moveMotorTarget(driveTrain -> left, -setpoint, speed);
 		}
 		waitUntilMotorStop(driveTrain -> left);
 	} else {
@@ -114,12 +116,12 @@ void single_self_turn(DriveTrain* driveTrain, float degree, direction turning_mo
 			if (driveTrain -> is_inverted == true){
 				moveMotorTarget(driveTrain -> right, setpoint, speed);
 			} else {
-				moveMotorTarget(driveTrain -> right, setpoint, -speed);
+				moveMotorTarget(driveTrain -> right, -setpoint, speed);
 			}
 		} else if (driveTrain -> is_inverted == true){
 			moveMotorTarget(driveTrain -> right, setpoint, speed);
 		} else{
-			moveMotorTarget(driveTrain -> right, setpoint, -speed);
+			moveMotorTarget(driveTrain -> right, -setpoint, speed);
 		}
 	}
 	waitUntilMotorStop(driveTrain -> right);
@@ -131,25 +133,25 @@ void single_self_turn(DriveTrain* driveTrain, float degree, direction turning_mo
  * @param driveTrain The drivetrain of the robot
  * @param degree The degree of turning of the whole robot (unit: degree)
  * @param turning_motor The motor use for turning (LEFT/RIGHT)
- * @param speed Speed of the turning motor (-100 ~ 100) (unit: %)
+ * @param speed Speed of the turning motor (>0) (unit: %)
  */
 void situ_self_turn(DriveTrain* driveTrain, float degree, float speed){
 	float setpoint = (WHEEL_SEPARATION * degree) / WHEEL_RADIUS;
 	setpoint /= 2;
 	if (driveTrain -> motor_type != EV3_MEDIUM){
 		if (driveTrain -> is_inverted == true){
-			moveMotorTarget(driveTrain -> left, setpoint, -speed);
+			moveMotorTarget(driveTrain -> left, -setpoint, speed);
 			moveMotorTarget(driveTrain -> right, setpoint, speed);
 		} else {
 			moveMotorTarget(driveTrain -> left, setpoint, speed);
-			moveMotorTarget(driveTrain -> right, setpoint, -speed);
+			moveMotorTarget(driveTrain -> right, -setpoint, speed);
 		}
 	} else if (driveTrain -> is_inverted == true){
 		moveMotorTarget(driveTrain -> left, setpoint, speed);
 		moveMotorTarget(driveTrain -> right, setpoint, speed);
 	} else{
-		moveMotorTarget(driveTrain -> left, setpoint, -speed);
-		moveMotorTarget(driveTrain -> right, setpoint, -speed);
+		moveMotorTarget(driveTrain -> left, -setpoint, speed);
+		moveMotorTarget(driveTrain -> right, -setpoint, speed);
 	}
 	waitUntilMotorStop(driveTrain -> left);
 }

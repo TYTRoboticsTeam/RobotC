@@ -4,6 +4,8 @@
 #include "pid.h"
 #include "movement.h"
 #include "detection.h"
+#include "display.h"
+#include "calculation.h"
 
 bool is_wb_init = false;
 
@@ -12,10 +14,10 @@ DriveTrain wheelbase;
 bool wb_init(bool init){
 	if (!init){
 		// ---These are the config I used for testing--- //
-		//wheelbase.left = motorB;
-		//wheelbase.right = motorC;
-		//wheelbase.motor_type = EV3_LARGE;
-		//wheelbase.is_inverted = true;
+		wheelbase.left = motorB;
+		wheelbase.right = motorC;
+		wheelbase.motor_type = EV3_LARGE;
+		wheelbase.is_inverted = false;
 	}
 	return true;
 }

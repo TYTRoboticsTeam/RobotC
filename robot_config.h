@@ -1,15 +1,23 @@
 #pragma once
-// ------These are the config I used for testing------ //
-//#pragma config(Motor,  motorB,          MB,            tmotorEV3_Large, PIDControl, driveLeft, encoder)
-//#pragma config(Motor,  motorC,          MC,            tmotorEV3_Large, PIDControl, driveRight, encoder)
 //#pragma config(Sensor, S1,     CS1,            sensorEV3_Color)
 //#pragma config(Sensor, S2,     CS2,            sensorEV3_Color)
-//#pragma config(Sensor, S3,     US,             sensorEV3_Ultrasonic)
-//#pragma config(Sensor, S4,     GS,             sensorEV3_Gyro, modeEV3Gyro_RateAndAngle)
-
-// Initialize your robot configurations here.
+//#pragma config(Motor,  motorB,          MB,            tmotorEV3_Large, PIDControl, driveLeft, encoder)
+//#pragma config(Motor,  motorC,          MC,            tmotorEV3_Large, PIDControl, driveRight, encoder)
 
 bool start_main = false;
+
+bool buttonListener(const char button){
+	bool is_bumped = false;
+	if (getButtonPress(button) && is_bumped == false){
+		while (getButtonPress(button) == 1){
+			is_bumped = false;
+		}
+		is_bumped = true;
+	} else {
+		is_bumped = false;
+	}
+	return is_bumped;
+}
 
 typedef enum{
 	A,
